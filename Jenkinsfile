@@ -1,30 +1,14 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'Greeting', defaultValue: 'Unimoni', description: 'Greetigns')
+        string(name: 'unimoni_env', defaultValue: 'DEV', description: 'Greetigns')
+    }
     stages {
-        stage('Run Tests') {
-            parallel {
-                stage('UT Test On parallel') {
-                    
-                    steps {
-                        sh 'echo thread 1'
-                    }
-                    post {
-                        always {
-                            sh ' echo post build'
-                        }
-                    }
-                }
-                stage('IT Test On parallel') {
-                    
-                    steps {
-                        sh 'echo thread 2'
-                    }
-                    post {
-                        always {
-                            sh 'echo post build'
-                        }
-                    }
-                }
+        stage('Example') {
+            steps {
+                echo "${params.Greeting} World!"
+                 echo "${params.unimoni_env} World!"
             }
         }
     }
