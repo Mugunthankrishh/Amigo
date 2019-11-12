@@ -1,22 +1,30 @@
 pipeline {
-      agent { label 'ubuntu' }
+    agent any
     stages {
-        stage('Build') { 
-            steps {
-                   sh 'mvn package'
-                // 
-            }
-        }
-        stage('Test') { 
-            steps {
-                   echo 'Run integration tests here...'
-                // 
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                  echo 'Deploy...'
-                // 
+        stage('Run Tests') {
+            parallel {
+                stage('UT Test On parallel') {
+                    
+                    steps {
+                        sh 'echo thread 1'
+                    }
+                    post {
+                        always {
+                            sh ' echo post build'
+                        }
+                    }
+                }
+                stage('IT Test On parallel') {
+                    
+                    steps {
+                        sh 'echo thread 2'
+                    }
+                    post {
+                        always {
+                            sh 'echo post build'
+                        }
+                    }
+                }
             }
         }
     }
