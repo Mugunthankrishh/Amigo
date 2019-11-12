@@ -1,11 +1,11 @@
 pipeline {
    agent any
    parameters {
-        choice(choices: ['DEV', 'SIT'], description: 'What AWS region?', name: 'region')
+        choice(choices: ['dev', 'prod'], description: 'What AWS region?', name: 'region')
     }
    
    stages {
-        stage('Prod') {
+        stage('Build') {
            
             steps {
                 echo 'Building..'
@@ -18,7 +18,7 @@ pipeline {
         }
         }
    
-        stage('Prod') {
+        stage('Deploy') {
            
             steps {
                 
@@ -27,9 +27,9 @@ pipeline {
                 sh 'sudo apt install tomcat8-admin -y'
                 sh 'sudo apt install tomcat8-user -y'
                 sh 'sudo cp /home/ubuntu/workspace/params-pipeline/target/grants.war /var/lib/tomcat8/webapps/'
-                sh 'sudo cp /home/ubuntu/workspace/params-pipeline/tomcat-users.xml /etc/tomcat8/'
+                sh 'sudo cp /home/ubuntu/workspace/params-pipeleine/tomcat-users.xml /etc/tomcat8/'
                 sh 'sudo service tomcat8 restart'
             }
         }
     }
-}  
+}
