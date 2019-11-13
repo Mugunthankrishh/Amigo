@@ -13,6 +13,12 @@
     <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
 
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<!-- Organization and project keys are displayed in the right sidebar of the project homepage -->
+<sonar.organization>mugunthankrishh</sonar.organization>
+<sonar.login>e8fccb6b9749120af8c4e87650c19a61d5f84873</sonar.login> 
+	</properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
